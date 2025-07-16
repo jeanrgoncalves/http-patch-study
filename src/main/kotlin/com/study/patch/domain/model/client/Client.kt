@@ -7,9 +7,11 @@ data class Client(
     val name: String,
     val address: Address
 ) {
-    fun updateAddress(
-        street: String,
-        number: Int,
-        zipCode: String
-    ) = this.copy(address = Address.create(street, number, zipCode))
+    fun updateAddress(newAddress: Address) = this.copy(
+        address = Address.create(
+            newAddress.street,
+            newAddress.number,
+            newAddress.zipCode
+        )
+    )
 }

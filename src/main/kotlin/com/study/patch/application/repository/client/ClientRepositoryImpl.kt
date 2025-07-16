@@ -16,8 +16,8 @@ class ClientRepositoryImpl : ClientRepository {
     override fun save(client: Client): Client {
         clients.removeIf { it.id == client.id }
         clients.add(client)
-        println("Cliente $client salvo")
-        println("BD: $clients")
+        println("Client $client saved")
+        println("DB: $clients")
         return client
     }
 
