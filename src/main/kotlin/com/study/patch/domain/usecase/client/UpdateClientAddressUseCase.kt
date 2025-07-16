@@ -11,9 +11,10 @@ class UpdateClientAddressUseCase(
         street: String,
         number: Int,
         zipCode: String
-    ) = clientRepository.findById(clientId).let {
+    ) = clientRepository.findById(clientId)?.let {
             val updatedClient = it.updateAddress(street, number, zipCode)
             clientRepository.save(updatedClient)
+            println("Endereço do cliente ${it.name} atualizado")
         }
 
 }

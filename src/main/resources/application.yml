@@ -1,1 +1,3 @@
-spring.application.name=patch
+spring:
+  application:
+    name: patch

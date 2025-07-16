@@ -1,5 +1,6 @@
 package com.study.patch.config
 
+import com.study.patch.application.repository.client.ClientRepositoryImpl
 import com.study.patch.domain.model.client.ClientRepository
 import com.study.patch.domain.usecase.client.UpdateClientAddressUseCase
 import org.springframework.context.annotation.Bean
@@ -11,5 +12,8 @@ class UpdateClientAddressUseCaseConfig {
     @Bean
     fun updateClientAddressUseCase(clientRepository: ClientRepository) =
         UpdateClientAddressUseCase(clientRepository)
+
+    @Bean
+    fun clientRepository() = ClientRepositoryImpl()
 
 }
