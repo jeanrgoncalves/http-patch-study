@@ -2,6 +2,7 @@ package com.study.patch.application.controller.client
 
 import com.study.patch.domain.usecase.client.GetClientUseCase
 import com.study.patch.domain.usecase.client.UpdateClientAddressUseCase
+import com.study.patch.util.logger
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -16,22 +17,23 @@ class ClientController(
     val updateClientAddressUseCase: UpdateClientAddressUseCase,
     val getClientUseCase: GetClientUseCase
 ) {
+    private val logger = logger()
 
     @PatchMapping("/{id}/address")
     fun updateAddress(@PathVariable id: String, @RequestBody request: UpdateClientAddressRequest) =
-        updateClientAddressUseCase.execute(
-            id,
-            request.street,
-            request.number,
-            request.zipCode
-        )
+        logger.info("Request: $request").let {
+            updateClientAddressUseCase.execute(
+                id,
+                request.street,
+                request.number,
+                request.zipCode
+            )
+        }
 
     @GetMapping("{id}")
     fun getClient(@PathVariable id: String) =
         getClientUseCase.execute(id).let {
             ResponseEntity.ok(it)
         }
-
-    //TODO: implementar exception de cliente nao encontrado e SLF4J logs
 
 }
